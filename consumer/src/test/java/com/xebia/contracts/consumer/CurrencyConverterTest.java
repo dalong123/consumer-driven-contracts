@@ -13,7 +13,7 @@ public class CurrencyConverterTest {
 
         CurrencyConverter converter = new CurrencyConverter(service);
         String result = converter.convert("15.2 USD to EUR");
-        assertEquals("15.2 USD = 12.28 EUR", result);
+        assertEquals("15.20 USD = 12.28 EUR", result);
     }
 
     @Test
@@ -24,5 +24,14 @@ public class CurrencyConverterTest {
         CurrencyConverter converter = new CurrencyConverter(service);
         String result = converter.convert("12.28 EUR to USD");
         assertEquals("12.28 EUR = 15.20 USD", result);
+    }
+
+    @Test
+    public void testInvalidInput() {
+        CurrencyService service = mock(CurrencyService.class);
+        CurrencyConverter converter = new CurrencyConverter(service);
+
+        String result = converter.convert("1.234 USD to EUR");
+        assertEquals("Invalid input: \"1.234 USD to EUR\"", result);
     }
 }
