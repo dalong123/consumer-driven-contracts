@@ -5,5 +5,11 @@
     "port": 9000,
     "path": ""
   },
+  "stateChangeUrl": {
+    "protocol": "http://",
+    "host": "localhost",
+    "port": 9000,
+    "path": "/enterState"
+  },
   "timeoutSeconds": 5
 }

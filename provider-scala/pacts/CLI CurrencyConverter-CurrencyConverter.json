@@ -6,6 +6,7 @@
     "name" : "CLI CurrencyConverter"
   },
   "interactions" : [ {
+    "providerState" : "A conversion rate EUR to USD of 1.24",
     "description" : "a request for conversion",
     "request" : {
       "method" : "GET",
