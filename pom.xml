@@ -40,15 +40,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>au.com.dius</groupId>
-                <artifactId>pact-jvm-consumer-junit_2.11</artifactId>
-                <version>${pact.jvm.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>3.0.0</version>
-            </dependency>            <dependency>
+            </dependency>
+            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
@@ -76,12 +72,37 @@
                 <version>1.10.8</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>au.com.dius</groupId>
+                <artifactId>pact-jvm-consumer-junit_2.11</artifactId>
+                <version>${pact.jvm.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- Dependencies shared by all submodules. -->
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
     <modules>
         <module>provider</module>
         <module>consumer</module>
     </modules>
+
     <profiles>
         <profile>
             <id>sonar</id>
