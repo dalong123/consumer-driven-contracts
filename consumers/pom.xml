@@ -109,7 +109,6 @@
     </dependencies>
 
     <modules>
-        <module>provider</module>
         <module>consumer</module>
     </modules>
 
