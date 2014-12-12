@@ -12,7 +12,7 @@ public class RestCurrencyServiceContractTest extends ConsumerPactTest {
     @Override
     protected PactFragment createFragment(ConsumerPactBuilder.PactDslWithProvider builder) {
         return builder
-            //.given("A conversion rate EUR to USD of 1.24")
+            .given("A conversion rate EUR to USD of 1.24")
             .uponReceiving("a request for conversion")
                 .path("/convert/1.00/EUR/to/USD")
                 .method("GET")
