@@ -1,0 +1,9 @@
+{
+  "providerRoot": {
+    "protocol": "http://",
+    "host": "localhost",
+    "port": 9000,
+    "path": ""
+  },
+  "timeoutSeconds": 5
+}

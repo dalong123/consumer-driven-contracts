@@ -1,0 +1,32 @@
+{
+  "provider" : {
+    "name" : "CurrencyConverter"
+  },
+  "consumer" : {
+    "name" : "CLI CurrencyConverter"
+  },
+  "interactions" : [ {
+    "description" : "a request for conversion",
+    "request" : {
+      "method" : "GET",
+      "path" : "/convert/1.00/EUR/to/USD"
+    },
+    "response" : {
+      "status" : 200,
+      "headers" : {
+        "Content-Type" : "application/json; charset=UTF-8"
+      },
+      "body" : {
+        "amount" : 1.24
+      }
+    }
+  } ],
+  "metadata" : {
+    "pact-specification" : {
+      "version" : "2.0.0"
+    },
+    "pact-jvm" : {
+      "version" : "2.1.7"
+    }
+  }
+}

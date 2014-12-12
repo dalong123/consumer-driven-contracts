@@ -12,13 +12,14 @@ public class RestCurrencyServiceContractTest extends ConsumerPactTest {
     @Override
     protected PactFragment createFragment(ConsumerPactBuilder.PactDslWithProvider builder) {
         return builder
-                //.given("a test")
-                .uponReceiving("a request for conversion")
+            //.given("A conversion rate EUR to USD of 1.24")
+            .uponReceiving("a request for conversion")
                 .path("/convert/1.00/EUR/to/USD")
                 .method("GET")
-                .willRespondWith()
+            .willRespondWith()
                 .status(200)
-                .body("{\"amount\": 1.24}", ContentType.APPLICATION_JSON).toFragment();
+                .body("{\"amount\": 1.24}", ContentType.APPLICATION_JSON)
+            .toFragment();
     }
 
     @Override
