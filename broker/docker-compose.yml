@@ -1,0 +1,21 @@
+postgresql:
+  image: orchardup/postgresql:latest
+  environment:
+    - POSTGRESQL_USER=pact_broker
+    - POSTGRESQL_PASS=MyBrokerIsSoG00d!
+    - POSTGRESQL_DB=pact_broker
+  volumes:
+    - /var/lib/docker/data/pact_broker/postgresql/:/var/lib/postgresql
+
+broker:
+  image: dius/pact_broker
+  links:
+    - postgresql
+  environment:
+    - PACT_BROKER_DATABASE_USERNAME=pact_broker
+    - PACT_BROKER_DATABASE_PASSWORD=MyBrokerIsSoG00d!
+    - PACT_BROKER_DATABASE_HOST=postgresql
+    - PACT_BROKER_DATABASE_NAME=pact_broker
+  ports:
+    - "8080:80"
+  command: /usr/local/bin/rackup -o 0.0.0.0 -p 80
