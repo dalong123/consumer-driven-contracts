@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.xebia.cdc.cart</groupId>
+    <artifactId>cart-service</artifactId>
+    <version>0.1.0</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.2.5.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <pact-broker.url>http://localhost:8085</pact-broker.url>
+        <pact.dir>${project.build.directory}/pacts-dependents</pact.dir>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>au.com.dius</groupId>
+                <artifactId>pact-jvm-provider-maven_2.11</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <serviceProviders>
+                        <serviceProvider>
+                            <name>cart</name>
+                            <pactFileDirectory>${pact.dir}</pactFileDirectory>
+                            <stateChangeUrl>http://localhost:8080/given</stateChangeUrl>
+                            <!--port>8081</port-->
+                            <!--consumers>
+                                <consumer>
+                                    <name>webshop</name>
+                                    <pactFile>src/test/pacts/webshop-cart-pact.json</pactFile>
+                                </consumer>
+                                <consumer>
+                                    <name>availabilityBatch</name>
+                                    <pactFile>src/test/pacts/availabilityBatch-cart-pact.json</pactFile>
+                                </consumer>
+                            </consumers-->
+                        </serviceProvider>
+                    </serviceProviders>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.warmuuh</groupId>
+                <artifactId>pactbroker-maven-plugin</artifactId>
+                <version>0.0.5-SNAPSHOT</version>
+                <configuration>
+                    <brokerUrl>${pact-broker.url}</brokerUrl>
+                    <pacts>${pact.dir}</pacts>
+                    <provider>cart</provider>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>download-pacts</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

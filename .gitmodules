@@ -1,0 +1,3 @@
+[submodule "lib/pactbroker-maven-plugin"]
+	path = lib/pactbroker-maven-plugin
+	url = https://github.com/warmuuh/pactbroker-maven-plugin.git

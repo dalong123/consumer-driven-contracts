@@ -1,0 +1,28 @@
+cartdb:
+  image: postgres:9.4
+  environment:
+    - POSTGRES_USER=cart
+    - POSTGRES_PASSWORD=cart
+  ports:
+    - "5432:5432"
+
+brokerdb:
+  image: postgres:9.4
+  environment:
+    - POSTGRES_USER=pact_broker
+    - POSTGRES_PASSWORD=pact_broker
+  volumes:
+    - /var/lib/docker/data/cdc/brokerdb:/var/lib/postgresql
+
+broker:
+  #image: dius/pact_broker
+  build: broker
+  links:
+    - brokerdb
+  environment:
+    - PACT_BROKER_DATABASE_USERNAME=pact_broker
+    - PACT_BROKER_DATABASE_PASSWORD=pact_broker
+    - PACT_BROKER_DATABASE_HOST=brokerdb
+    - PACT_BROKER_DATABASE_NAME=pact_broker
+  ports:
+    - "8085:8080"
