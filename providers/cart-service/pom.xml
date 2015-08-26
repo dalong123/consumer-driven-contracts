@@ -47,26 +47,23 @@
                 <groupId>au.com.dius</groupId>
                 <artifactId>pact-jvm-provider-maven_2.11</artifactId>
                 <version>3.0.1</version>
-                <configuration>
-                    <serviceProviders>
-                        <serviceProvider>
-                            <name>cart</name>
-                            <pactFileDirectory>${pact.dir}</pactFileDirectory>
-                            <stateChangeUrl>http://localhost:8080/given</stateChangeUrl>
-                            <!--port>8081</port-->
-                            <!--consumers>
-                                <consumer>
-                                    <name>webshop</name>
-                                    <pactFile>src/test/pacts/webshop-cart-pact.json</pactFile>
-                                </consumer>
-                                <consumer>
-                                    <name>availabilityBatch</name>
-                                    <pactFile>src/test/pacts/availabilityBatch-cart-pact.json</pactFile>
-                                </consumer>
-                            </consumers-->
-                        </serviceProvider>
-                    </serviceProviders>
-                </configuration>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <serviceProviders>
+                                <serviceProvider>
+                                    <name>cart</name>
+                                    <pactFileDirectory>${pact.dir}</pactFileDirectory>
+                                    <stateChangeUrl>http://localhost:8080/given</stateChangeUrl>
+                                </serviceProvider>
+                            </serviceProviders>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.github.warmuuh</groupId>
