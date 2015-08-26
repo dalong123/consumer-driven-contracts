@@ -1,3 +1,4 @@
+/* globals console, Pact, XMLHttpRequest */
 (function() {
   'use strict';
 
@@ -12,7 +13,7 @@
     var cartClient, cartProvider, $httpBackend;
 
     beforeEach(function() {
-      inject(function(CartService, _$httpBackend_, $log) {
+      inject(function(CartService, _$httpBackend_) {
         cartClient = CartService;
         $httpBackend = _$httpBackend_;
         cartProvider = Pact.mockService({
@@ -37,9 +38,8 @@
               }
             }
           }
-          console.debug('About to send data', data);
           req.send(data);
-          console.debug('Done request to ' + pactUrl + ', result: ' + req.status + ', data:', req.response);
+          console.debug('Done request to ' + pactUrl + ', result: ' + req.status + ', data: ' + req.response + ', headers: ' + req.getAllResponseHeaders());
           return [req.status, req.response];
         });
       });
