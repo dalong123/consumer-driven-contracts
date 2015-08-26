@@ -28,7 +28,7 @@
         $httpBackend.whenGET(/api/).respond(function(method, url, data, headers) {
           // pass through to Pact server
           var req = new XMLHttpRequest();
-          var pactUrl = 'http://localhost:' + PACT_MOCK_SERVICE_PORT + url;
+          var pactUrl = 'http://localhost:' + PACT_MOCK_SERVICE_PORT + url.replace(/\/api/, "");
           console.debug('Rewrote ' + url + ' to ' + pactUrl);
           req.open(method, pactUrl, false);
           if (headers) {
@@ -48,7 +48,7 @@
     it('should return an empty cart if no user ID was specified', function(done) {
       cartProvider
         .uponReceiving('a request without user ID')
-        .withRequest('get', '/api/cart')
+        .withRequest('get', '/cart') // /api is removed above
         .willRespondWith(200, {}, {
           items: []
         });
