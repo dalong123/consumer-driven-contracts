@@ -7,6 +7,7 @@
  */
 
 var gutil = require('gulp-util');
+var path = require('path');
 
 /**
  *  The main paths of your project handle these with care
@@ -38,4 +39,12 @@ exports.errorHandler = function(title) {
     gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
     this.emit('end');
   };
+};
+
+exports.pact = {
+  mockService: {
+    port: 1234,
+    log: path.join(exports.paths.tmp, 'pact.log'),
+    pactDir: path.join(exports.paths.tmp, 'pacts')
+  }
 };

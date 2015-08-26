@@ -4,9 +4,7 @@
   "dependencies": {},
   "scripts": {
     "postinstall": "bundle install",
-    "pretest": "bundle exec pact-mock-service start -p 1234 -l tmp/pact.log -d tmp/pacts -o",
-    "test": "gulp test",
-    "posttest": "bundle exec pact-mock-service stop -p 1234"
+    "test": "gulp test"
   },
   "devDependencies": {
     "gulp": "~3.9.0",

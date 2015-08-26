@@ -9,9 +9,8 @@ After cloning: like most Angular projects, run `npm install` and
 `bower install`. The `npm install` command also runs `bundler install` to get
 the required Ruby code.
 
-To test: `npm test` (this starts and stops the Ruby `pact-mock-service`,
-alternatively start it up yourself somewhere and run `gulp test`). The pact
-is generated in `tmp/pacts`.
+To test: `npm test`, or `gulp test`, depending on your preference. Gulp will
+start and stop the pact mock service, the pact is generated in `.tmp/pacts`.
 
 You can upload this to your Pact Broker, for now by hand. Using the excellent
 [httpie](https://github.com/jkbrzt/httpie):
