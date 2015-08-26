@@ -1,5 +1,6 @@
 package com.xebia.cdc.provider.cart.controllers;
 
+import com.xebia.cdc.provider.cart.db.CartItem;
 import com.xebia.cdc.provider.cart.db.CartRepository;
 import com.xebia.cdc.provider.cart.db.Converter;
 import com.xebia.cdc.provider.cart.model.Cart;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/cart")
@@ -22,8 +25,11 @@ public class CartController {
     private final Converter converter = new Converter();
 
     @RequestMapping(method = RequestMethod.GET)
-    public Cart getCart(@RequestHeader("X-UserId") String userId) {
+    public Cart getCart(@RequestHeader(value = "X-UserId", required = false) String userId) {
         LOG.info("get cart for {}", userId);
+        if (userId == null) {
+            return converter.toModel(new com.xebia.cdc.provider.cart.db.Cart(null, Collections.emptyList()));
+        }
         return converter.toModel(repository.findOne(userId));
     }
 }

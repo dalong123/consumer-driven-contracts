@@ -28,18 +28,23 @@ public class TestDataController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void setState(@RequestBody StateChange stateChange) {
-        LOG.info("Set state to \"{}\"", stateChange.getState());
+        LOG.info("Setting state to \"{}\"", stateChange.getState());
+
+        // first clean up
+        cartRepository.deleteAll();
+        cartItemRepository.deleteAll();
 
         switch (stateChange.getState()) {
-            case "A user with id 'abc' with a cart with a shaver":
+            case "a user with id 'abc' with a cart with a single item":
             case "a cart with a single item":
                 CartItem item = new CartItem("IDC12", 1, 4995, "Philishave Model PS-4863");
                 Cart cart = new Cart("abc", Arrays.asList(item));
-                cartRepository.deleteAll();
-                cartItemRepository.deleteAll();
 
                 cartRepository.save(cart);
                 cartItemRepository.save(item);
+                break;
+            case "an unknown user with id 'notKnown'":
+                // nothing to do here
                 break;
             default:
                 throw new IllegalArgumentException("Unknown state: " + stateChange.getState());
