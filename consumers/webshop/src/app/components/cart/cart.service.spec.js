@@ -28,7 +28,8 @@
         $httpBackend.whenGET(/api/).respond(function(method, url, data, headers) {
           // pass through to Pact server
           var req = new XMLHttpRequest();
-          var pactUrl = 'http://localhost:' + PACT_MOCK_SERVICE_PORT + url.replace(/\/api/, "");
+          var pactUrl = 'http://localhost:' + PACT_MOCK_SERVICE_PORT +
+            url.replace(/\/api/, "");
           console.debug('Rewrote ' + url + ' to ' + pactUrl);
           req.open(method, pactUrl, false);
           if (headers) {
@@ -39,7 +40,9 @@
             }
           }
           req.send(data);
-          console.debug('Done request to ' + pactUrl + ', result: ' + req.status + ', data: ' + req.response + ', headers: ' + req.getAllResponseHeaders());
+          console.debug('Done request to ' + pactUrl + ', result: ' +
+            req.status + ', data: ' + req.response + ', headers: ' +
+            req.getAllResponseHeaders());
           return [req.status, req.response];
         });
       });
